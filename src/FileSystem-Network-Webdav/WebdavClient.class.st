@@ -42,7 +42,7 @@ WebdavClient >> get: path [
 		webdavPath: path;
 		get.
 	self isNotFound
-		ifTrue: [ ^ FileDoesNotExist signal ].
+		ifTrue: [ ^ FileDoesNotExistException signal ].
 	self isSuccess
 		ifFalse: [ ^ Error signal: self contents ].
 	^ self contents ifNil: [ ByteArray new ]
@@ -99,7 +99,7 @@ WebdavClient >> propertyFind: path query: propfindQuery depth: depth [
 		method: #PROPFIND;
 		execute.
 	self isNotFound
-		ifTrue: [ ^ FileDoesNotExist signalWith: path ].
+		ifTrue: [ ^ FileDoesNotExistException signalWith: path ].
 	(self  isSuccess or: [ self  response code = 207 ])
 		ifFalse: [ ^ Error signal: self  contents ].
 	^ self parsePropfindResponse: self  contents

@@ -31,7 +31,7 @@ NetworkFileSystemStore >> basicCreationTime: anEntry [
 NetworkFileSystemStore >> basicEntry: directoryEntry path: aPath nodesDo: aBlock [
 	| entries |
 	[ entries := client lookupEntriesIn: aPath ]
-		on: FileDoesNotExist
+		on: FileDoesNotExistException
 		do: [ :ex | self signalDirectoryDoesNotExist: aPath ].
 	entries do: [ :each | aBlock value: each ]
 ]
@@ -39,7 +39,7 @@ NetworkFileSystemStore >> basicEntry: directoryEntry path: aPath nodesDo: aBlock
 { #category : #public }
 NetworkFileSystemStore >> basicEntryAt: aPath [
 	^ [ client lookupPath: aPath ]
-		on: FileDoesNotExist
+		on: FileDoesNotExistException
 		do: [ :ex | #badDirectoryPath ]
 ]
 
@@ -128,7 +128,7 @@ NetworkFileSystemStore >> defaultWorkingDirectory [
 { #category : #abstract }
 NetworkFileSystemStore >> delete: path [
 	(self exists: path)
-		ifFalse: [ ^ FileDoesNotExist signalWith: path ].
+		ifFalse: [ ^ FileDoesNotExistException signalWith: path ].
 	(self isDirectory: path)
 		ifTrue: [ client deleteDirectory: path ]
 		ifFalse: [ client deleteFile: path ]

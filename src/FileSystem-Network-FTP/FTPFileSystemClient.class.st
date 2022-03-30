@@ -126,9 +126,9 @@ FTPFileSystemClient >> lookupPath: path [
 			self ensureCwd: path parent.
 			responses := ftpClient getDirectoryResponses.
 			responses isEmpty
-				ifTrue: [ ^ FileDoesNotExist signalWith: path ].
+				ifTrue: [ ^ FileDoesNotExistException signalWith: path ].
 			entries := responses collect: [ :response | self entryFromResponse: response ].
-			entries detect: [ :entry | entry basename = path basename ] ifNone: [ FileDoesNotExist signalWith: path ] ]
+			entries detect: [ :entry | entry basename = path basename ] ifNone: [ FileDoesNotExistException signalWith: path ] ]
 ]
 
 { #category : #operations }

@@ -7,7 +7,7 @@ FTPClient >> checkResponse [
 	self
 		checkResponseOnError: [ :response | 
 			(self responseCode = 550
-				ifTrue: [ FileDoesNotExist ]
+				ifTrue: [ FileDoesNotExistException ]
 				ifFalse: [ TelnetProtocolError protocolInstance: self ]) signal: response ]
 		onWarning: [ :response | (TelnetProtocolError protocolInstance: self) signal: response ]
 ]

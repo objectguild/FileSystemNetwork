@@ -104,7 +104,7 @@ WebdavFileSystemClient >> lookupPath: path [
 	propstats := webDavClient propertyFind: (self stringFromPath: path) depth: 0.
 	entries := propstats collect: [ :propstat | self entryFromPropstat: propstat ].
 	basename := path basename.
-	^ entries detect: [ :entry | entry basename = basename ] ifNone: [ FileDoesNotExist signalWith: path ]
+	^ entries detect: [ :entry | entry basename = basename ] ifNone: [ FileDoesNotExistException signalWith: path ]
 ]
 
 { #category : #operations }
