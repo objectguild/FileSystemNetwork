@@ -1,0 +1,14 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'FileSystemNetwork',
+      #directory : 'src',
+      #load : [ 'CI' ],
+      #onWarningLog : true,
+      #platforms : [ #pharo ]
+    }
+  ],
+  #testing : {
+    #categories : [ 'FileSystem-Tests-Network-*' ]
+  }
+}
