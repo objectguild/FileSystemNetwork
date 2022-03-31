@@ -13,3 +13,9 @@ ClosingWriteStream >> close [
 	collection close.
 	^ super close
 ]
+
+{ #category : #testing }
+ClosingWriteStream >> isBinary [ 
+
+	^ true
+]

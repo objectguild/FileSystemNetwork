@@ -21,11 +21,6 @@ NetworkFileSystemDirectoryEntry >> basename [
 ]
 
 { #category : #accessing }
-NetworkFileSystemDirectoryEntry >> basename: aString [
-	basename := aString
-]
-
-{ #category : #accessing }
 NetworkFileSystemDirectoryEntry >> creationTime [
 	^ creationTime
 ]

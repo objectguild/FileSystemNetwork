@@ -49,6 +49,11 @@ NetworkFileHandle >> binaryReadStream [
 	^ ReadStream on: bytes from: 1 to: size
 ]
 
+{ #category : #'streams-compatibility' }
+NetworkFileHandle >> binaryWriteStream [
+	^ self writeStream
+]
+
 { #category : #public }
 NetworkFileHandle >> close [
 	"Upload data to the store if modified."

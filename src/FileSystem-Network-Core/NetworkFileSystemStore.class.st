@@ -21,7 +21,7 @@ NetworkFileSystemStore >> basenameFromEntry: entry [
 ]
 
 { #category : #abstract }
-NetworkFileSystemStore >> basicCreationTime: anEntry [
+NetworkFileSystemStore >> basicCreationTimeOf: anEntry [
 	" the entry contains the seconds since the squeak epoch in local time"
 
 	^ anEntry creationTime translateTo: DateAndTime localOffset
@@ -59,7 +59,7 @@ NetworkFileSystemStore >> basicIsSymlink: anEntry [
 ]
 
 { #category : #abstract }
-NetworkFileSystemStore >> basicModificationTime: anEntry [
+NetworkFileSystemStore >> basicModificationTimeOf: anEntry [
 	" the entry contains the seconds since the squeak epoch in local time"
 
 	^ anEntry modificationTime translateTo: DateAndTime localOffset
@@ -71,7 +71,7 @@ NetworkFileSystemStore >> basicPosixPermissions: anEntry [
 ]
 
 { #category : #abstract }
-NetworkFileSystemStore >> basicSize: anEntry [
+NetworkFileSystemStore >> basicSizeOf: anEntry [
 	^ anEntry fileSize
 ]
 
@@ -132,6 +132,17 @@ NetworkFileSystemStore >> delete: path [
 	(self isDirectory: path)
 		ifTrue: [ client deleteDirectory: path ]
 		ifFalse: [ client deleteFile: path ]
+]
+
+{ #category : #public }
+NetworkFileSystemStore >> entryFromNode: node path: path for: aFileSystem [
+
+	| entryPath reference |
+
+	entryPath := path / (self basenameFromEntry: node).
+	reference := FileReference fileSystem: aFileSystem path: entryPath.
+
+	^ MemoryDirectoryEntry reference: reference
 ]
 
 { #category : #printing }
