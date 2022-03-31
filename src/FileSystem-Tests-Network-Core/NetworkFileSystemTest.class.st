@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'TestServerUrl'
 	],
-	#category : #'FileSystem-Tests-Network-Core-FileSystem-Tests-Network-Core'
+	#category : #'FileSystem-Tests-Network-Core'
 }
 
 { #category : #testing }
@@ -22,6 +22,12 @@ NetworkFileSystemTest class >> testServerUrl [
 	TestServerUrl
 		ifNil: [ TestServerUrl := UIManager default request: ('Test Server URL for <1s> Filesystem tests?' expandMacrosWith: self name) ].
 	^ TestServerUrl
+]
+
+{ #category : #accessing }
+NetworkFileSystemTest class >> testServerUrl: aString [
+
+	TestServerUrl := aString
 ]
 
 { #category : #'initialize-release' }

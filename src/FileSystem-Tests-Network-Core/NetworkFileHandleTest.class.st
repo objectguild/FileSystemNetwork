@@ -1,7 +1,7 @@
 Class {
 	#name : #NetworkFileHandleTest,
 	#superclass : #FileSystemHandleTest,
-	#category : #'FileSystem-Tests-Network-Core-FileSystem-Tests-Network-Core'
+	#category : #'FileSystem-Tests-Network-Core'
 }
 
 { #category : #testing }
