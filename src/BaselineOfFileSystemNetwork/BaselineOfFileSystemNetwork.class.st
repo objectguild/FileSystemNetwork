@@ -14,14 +14,15 @@ BaselineOfFileSystemNetwork >> baseline: spec [
 		spec 
 			baseline: 'XMLParser' with: [ spec loads: #( 'Core' ); repository: 'github://pharo-contributions/XML-XMLParser:master' ] ;
 			baseline: 'XMLWriter' with: [ spec loads: #( 'Core' ); repository: 'github://pharo-contributions/XML-XMLWriter:master' ] ;
-			baseline: 'ZincHTTPComponents' with: [ spec loads: #( 'Core' 'AWS' ); repository: 'github://svenvc/zinc:master' ].
+			baseline: 'ZincHTTPComponents' with: [ spec loads: #( 'Core' ); repository: 'github://svenvc/zinc:master' ] ;
+			project: 'ZincHTTPComponents-AWS' copyFrom: 'ZincHTTPComponents' with: [ spec loads: #( 'AWS' ) ].
 
 		"Packages"
 		spec 
 			package: 'FileSystem-Network-Core' ;
 			package: 'FileSystem-Network-FTP' with: [ spec requires: #( 'FileSystem-Network-Core' ) ] ;
 			package: 'FileSystem-Network-Webdav' with: [ spec requires: #( 'FileSystem-Network-Core' 'XMLParser' 'XMLWriter' 'ZincHTTPComponents' ) ] ;
-			package: 'FileSystem-Network-S3' with: [ spec requires: #( 'FileSystem-Network-Core' 'ZincHTTPComponents' ) ] ;
+			package: 'FileSystem-Network-S3' with: [ spec requires: #( 'FileSystem-Network-Core' 'ZincHTTPComponents-AWS' ) ] ;
 
 			package: 'FileSystem-Tests-Network-Core' with: [ spec requires: #( 'FileSystem-Network-Core' ) ] ;
 			package: 'FileSystem-Tests-Network-FTP' with: [ spec requires: #( 'FileSystem-Tests-Network-Core' 'FileSystem-Network-FTP' ) ] ;
