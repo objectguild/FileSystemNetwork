@@ -48,6 +48,15 @@ WebdavClient >> get: path [
 	^ self contents ifNil: [ ByteArray new ]
 ]
 
+{ #category : #initialization }
+WebdavClient >> initialize [ 
+
+	super initialize. 
+
+	"All my responses must be handled using byte arrays."
+	self beBinary
+]
+
 { #category : #testing }
 WebdavClient >> isForbidden [
 	"Return true it the last executed HTTP request returned an HTTP forbidden response code."
