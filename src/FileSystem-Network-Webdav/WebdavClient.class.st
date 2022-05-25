@@ -4,6 +4,9 @@ A WebdavClient extends ZnClient and implements WebDav specific HTTP behaviour.
 Class {
 	#name : #WebdavClient,
 	#superclass : #ZnClient,
+	#instVars : [
+		'defaultReader'
+	],
 	#category : #'FileSystem-Network-Webdav'
 }
 
@@ -39,8 +42,10 @@ WebdavClient >> delete: path depth: depth [
 WebdavClient >> get: path [
 	self
 		resetEntity;
+		beBinary;
 		webdavPath: path;
-		get.
+		get;
+		resetReader. "Binary used for GET, can reset immediately for next use"
 	self isNotFound
 		ifTrue: [ ^ FileDoesNotExistException signal ].
 	self isSuccess
@@ -53,8 +58,8 @@ WebdavClient >> initialize [
 
 	super initialize. 
 
-	"All my responses must be handled using byte arrays."
-	self beBinary
+	"Save default reader to reset for non-binary requests."
+	defaultReader := self reader
 ]
 
 { #category : #testing }
@@ -115,11 +120,6 @@ WebdavClient >> propertyFind: path query: propfindQuery depth: depth [
 ]
 
 { #category : #operations }
-WebdavClient >> propertyFindAll: path depth: depth [
-	^ self propertyFind: path query: self propfindQuery depth: depth
-]
-
-{ #category : #operations }
 WebdavClient >> put: path data: data [
 	self
 		resetEntity;
@@ -135,6 +135,12 @@ WebdavClient >> put: path data: data [
 { #category : #'accessing request' }
 WebdavClient >> resetPath [
 	self path: '/'
+]
+
+{ #category : #initialization }
+WebdavClient >> resetReader [ 
+
+	self optionAt: #reader put: defaultReader
 ]
 
 { #category : #accessing }
