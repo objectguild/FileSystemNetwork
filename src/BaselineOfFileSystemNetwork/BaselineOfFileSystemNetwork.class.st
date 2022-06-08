@@ -12,8 +12,8 @@ BaselineOfFileSystemNetwork >> baseline: spec [
 
 		"Dependencies"
 		spec 
-			baseline: 'XMLParser' with: [ spec loads: #( 'Core' ); repository: 'github://pharo-contributions/XML-XMLParser:master' ] ;
-			baseline: 'XMLWriter' with: [ spec loads: #( 'Core' ); repository: 'github://pharo-contributions/XML-XMLWriter:master' ] ;
+			baseline: 'XMLParser' with: [ spec loads: #( 'Core' ); repository: 'github://objectguild/XML-XMLParser:master' ] ;
+			baseline: 'XMLWriter' with: [ spec loads: #( 'Core' ); repository: 'github://objectguild/XML-XMLWriter:master' ] ;
 			baseline: 'ZincHTTPComponents' with: [ spec loads: #( 'Core' ); repository: 'github://svenvc/zinc:master' ] ;
 			project: 'ZincHTTPComponents-AWS' copyFrom: 'ZincHTTPComponents' with: [ spec loads: #( 'AWS' ) ].
 
